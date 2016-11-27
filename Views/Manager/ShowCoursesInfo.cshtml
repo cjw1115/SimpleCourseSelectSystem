@@ -1,0 +1,50 @@
+﻿@model 选课系统.ViewModel.ShowCoursesInfoVM
+@{
+    ViewBag.Title = "ShowCousesInfo";
+    Layout = "~/Views/_LayoutPageManager.cshtml";
+}
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+    function OnSuccess(data) {
+        $(".Content").html(data);
+        $("#btn_back").show();
+        $("#a_export").show();
+        
+    }
+    function OnBegin(data) {
+        var value = $("#a_export").attr("href");
+        value = value + "?CourseID=" + data;
+        $("#a_export").attr("href", value);
+    }
+    function reload() {
+        window.location.reload();
+    }
+</script>
+<div><input id="btn_back" type="button" class="btn btn-info" value="返回"  style="display:none" onclick="reload();"/></div>
+<div><a id="a_export" class="btn btn-info" style="display:none" href="~/manager/GetCoursesInfoExcel">导出表格</a></div>
+
+<div class="Content">
+    <div><a class="btn btn-info"  href="~/manager/GetCoursesInfoExcel">导出表格</a></div>
+    <table class="table">
+        <tr>
+            <th>课程编号</th>
+            <th>课程名称</th>
+            <th>教师姓名</th>
+            <th>容量限制</th>
+            <th>已选人数</th>
+            <th>查看名单</th>
+        </tr>
+        @foreach (var item in Model.Couses)
+        {
+            <tr>
+                <td>@item.CourseID</td>
+                <td>@item.CourseName</td>
+                <td>@item.Mentor</td>
+                <td>@item.MaxNum</td>
+                <td>@item.RealNum</td>
+                <td>@Ajax.ActionLink("点击查看", "ShowCoursesInfo", "Manager", new { item.CourseID }, new AjaxOptions() { OnBegin="OnBegin("+ item.CourseID + ")", OnSuccess = "OnSuccess", HttpMethod = "Post" }, new { CourseID = item.CourseID })</td>
+            </tr>
+        }
+    </table>
+</div>

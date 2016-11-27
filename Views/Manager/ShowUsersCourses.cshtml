@@ -1,0 +1,62 @@
+﻿@model 选课系统.ViewModel.ShowUsersCoursesVM
+@{
+    ViewBag.Title = "ShowUsersCourses";
+    Layout = "~/Views/_LayoutPageManager.cshtml";
+}
+
+@using (Ajax.BeginForm("ShowUsersCourses", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "SearchScuccess" }))
+{<table>
+        <tr>
+            <td>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon" id="sizing-addon1 ">学号</span>
+                    <input type="text" class="form-control" width="150" name="username" value="@Model.Param.Username" />
+                </div>
+            </td>
+            <td>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon" id="sizing-addon1 ">姓名</span>
+                    <input type="text" ID="Tname" class="form-control" width="150" name="name" value="@Model.Param.Name" />
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon" id="sizing-addon1 ">课程号</span>
+                    <input type="text" ID="Tcourseid" class="form-control" width="150" name="CourseID" value="@Model.Param.CourseID" />
+                </div>
+            </td>
+            <td>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon" id="sizing-addon1 ">课程名称</span>
+                    <input type="text" ID="Tcourse" class="form-control" width="150" name="CourseName" value="@Model.Param.CourseName" />
+                </div>
+            </td>
+            <td>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon" id="sizing-addon1 ">教师姓名</span>
+                    <input type="text" ID="Mentor" class="form-control" width="150" name="Mentor" value="@Model.Param.Mentor" />
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <input type="submit" class="btn btn-info" value="查询" />
+    
+}
+<span >
+    <a href="~/manager/GetUsersCoursesExcel" class="btn btn-info">导出Excel</a>
+</span>
+
+@*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>*@
+<script type="text/javascript">
+    function SearchScuccess(data) {
+        $(".div_Content").html(data);
+    }
+</script>
+<div class="div_Content">
+    @{Html.RenderPartial("ShowUsersCoursesPartial", Model);}
+</div>
+

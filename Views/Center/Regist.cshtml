@@ -1,0 +1,236 @@
+﻿@model 选课系统.Model.User
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head  >
+    <title>注册</title>
+    <style type="text/css">
+        .style1 {
+            width: 100%;
+        }
+
+        .style3 {
+            border-left-color: #0000FF;
+            border-left-width: 1px;
+            border-right: 1px solid #0000FF;
+            border-top-color: #0000FF;
+            border-top-width: 1px;
+            border-bottom-color: #0000FF;
+            border-bottom-width: 1px;
+            text-align: right;
+        }
+
+        .style4 {
+            font-size: x-large;
+        }
+
+        .style5 {
+            border-left: 1px solid #0000FF;
+            border-top: 1px solid #0000FF;
+            border-bottom: 1px solid #0000FF;
+            padding: 1px 4px;
+            width: 290px;
+            text-align: right;
+        }
+
+        .style6 {
+            font-size: large;
+            width: 290px;
+            text-align: right;
+        }
+
+        .style7 {
+            border-left-color: #0000FF;
+            border-left-width: 1px;
+            border-right: 1px solid #0000FF;
+            border-top-color: #0000FF;
+            border-top-width: 1px;
+            border-bottom-color: #0000FF;
+            border-bottom-width: 1px;
+            text-align: left;
+        }
+
+        .style8 {
+            text-align: left;
+        }
+    </style>
+
+    <script src="~/Scripts/jquery-2.1.4.intellisense.js"></script>
+    <script src="~/Scripts/jquery-2.1.4.js"></script>
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script type="text/javascript">
+        function OnSuccess(data) {
+            alert(data.Msg);
+            if (data.Code == 1) {
+                window.location.href = "/Center/Login";
+            }
+        };
+    </script>
+</head>
+<body >
+    <div style="text-align:center; align-items:center">
+        @using (Ajax.BeginForm("Regist", "Center",new AjaxOptions { OnSuccess= "OnSuccess" ,HttpMethod="Post"}))
+        {
+            <div>
+                <table  class="style1">
+                    <tr>
+                        <td class="style4" style="text-align: center">
+                            <strong>用户注册</strong>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+            <table border="1"  class="css"
+                   style="width: 400px; height: 200px; text-align: left;">
+                <tr>
+                    <td class="style5">
+                        &nbsp; 姓名：
+                    </td>
+                    <td style="width: 300px; " class="style8">
+                        &nbsp;
+                        <input type="text" name="tbName" style="text-align: left" />
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td class="style5">
+                        &nbsp; 性别：
+                    </td>
+                    <td style="width: 300px; " class="style8">
+                        &nbsp;
+                        @Html.DropDownList("cbSex", new SelectListItem[] { new SelectListItem() { Text="男",Value="男", Selected=true },
+               new SelectListItem() { Text="女",Value="女" }})
+                        @Html.ValidationMessageFor(i => i.Gender)
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="style5">
+                        &nbsp;
+                        用户名/学号：
+                    </td>
+                    <td style="width: 300px; " class="style8">
+                        &nbsp;
+                        <input type="text" name="tbUsername" ID="tbusername" />
+                        &nbsp;&nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td class="style5">
+                        密码：
+                    </td>
+                    <td style="width: 300px; " class="style8">
+                        &nbsp;
+                        <input type="password" name="tbPassword" ID="password" />
+                        
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td class="style6">
+                        密码确认：
+                    </td>
+                    <td style="width: 300px; " class="style7">
+                        &nbsp;
+                        <input type="password" name="tbPasswordRe" ID="passwordre" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="style6">
+                        用户类型：
+                    </td>
+                    <td style="width: 300px; text-align: left" class="style3">
+                        @Html.DropDownList("cbUserType", new SelectListItem[] { new SelectListItem() { Text="教师",Value="Teacher" },
+               new SelectListItem() { Text="学生",Value="Student", Selected=true }})
+                        @Html.ValidationMessageFor(i => i.UserType)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="style6">
+                        &nbsp;
+                    </td>
+                    <td style="width: 300px; text-align: left" class="style3">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td class="style6">
+                        &nbsp;
+                    </td>
+                    <td style="width: 300px; text-align: left" class="style3">
+                        <strong>个人信息录入（学生必填*）</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="style6">
+                        联系方式：
+                    </td>
+                    <td style="width: 300px; text-align: left" class="style3">
+                        &nbsp;
+                        <input type="text" name="tbContract" ID="tblianxi" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="style6">
+                        加权成绩：
+                    </td>
+                    <td style="width: 300px; text-align: left" class="style3">
+                        &nbsp;
+                        <input type="text" name="tbScore" ID="tbchengji" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="style6">
+                        申报专业方向：
+                    </td>
+                    <td style="width: 300px; text-align: left" class="style3">
+                        &nbsp;
+
+
+                        @Html.DropDownList("cbFangxiang", new SelectListItem[] {
+                    new SelectListItem() { Text="机械制造方向",Value="机械制造方向", Selected=true },
+                    new SelectListItem() { Text="机械设计方向",Value="机械设计方向" },
+               new SelectListItem() { Text="测控技术方向",Value="测控技术方向" },
+               new SelectListItem() { Text="测控技术方向",Value="测控技术方向" },
+               new SelectListItem() { Text="过程装备方向",Value="过程装备方向" },
+               new SelectListItem() { Text="安全工程方向",Value="安全工程方向" },})
+                    </td>
+                </tr>
+                <tr>
+                    <td class="style6">
+                        申报导师姓名：
+                    </td>
+                    <td style="width: 300px; text-align: left" class="style3">
+                        &nbsp;
+                        <input type="text" name="tbTeacherName" ID="tbteacher" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="style6">
+                        学生情况简介：
+                    </td>
+                    <td style="width: 300px; text-align: left" class="style3">
+                        &nbsp;
+                        <textarea name="tbStuInfo" ID="tbjianjie"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center">
+                        <input type="submit" name="btnRegist" ID="btnenrol" value="注册" />
+                        &nbsp;
+                        &nbsp;
+                        <a href="~/Center/Login">返回登录</a>
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+    
+</body>
+</html>

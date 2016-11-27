@@ -1,0 +1,217 @@
+﻿@model 选课系统.Model.Course
+@{
+    ViewBag.Title = "EditCourse";
+    Layout = "~/Views/_LayoutPageManager.cshtml";
+}
+
+<h3>修改选课</h3>
+
+<script type="text/javascript">
+    function OnSuccess(data) {
+        alert(data.Msg);
+        if (data.Code == 1) {
+            window.location.href = "ShowCourses?flag=" + Math.random();
+        }
+    }
+</script>
+@using (Ajax.BeginForm("EditCourse", "manager", new AjaxOptions { OnSuccess = "OnSuccess", HttpMethod = "Post" }))
+{
+    <div style="width:350px;">
+
+        <table class="table" style="width:350px;">
+            <tr style="height: 25px">
+                <td class="style1">选课方向：</td>
+                <td colspan="2" class="style5">
+                    @Html.DropDownList("Major", new SelectListItem[]
+        {
+                           new SelectListItem() { Text="机械制造方向",Value="机械制造方向"},
+                           new SelectListItem() { Text="机械设计方向",Value="机械设计方向"},
+                           new SelectListItem() { Text="焊接技术方向",Value="焊接技术方向"},
+                           new SelectListItem() { Text="测控技术方向",Value="测控技术方向"},
+                           new SelectListItem() { Text="过程装备方向",Value="过程装备方向"},
+                           new SelectListItem() { Text="安全工程方向",Value="安全工程方向"},
+        },Model.Major, new { Class = "form-control" })
+                </td>
+            </tr>
+            <tr style="height: 25px">
+                <td class="style1">课程号：</td>
+                <td colspan="2" class="style5">
+                    <input type="text" name="CourseID" value="@Model.CourseID" />
+                </td>
+            </tr>
+            <tr style="height: 25px">
+                <td class="style1">课程名称：</td>
+                <td colspan="2" class="style5">
+                    <input type="text" name="CourseName" value="@Model.CourseName" />
+                </td>
+            </tr>
+            <tr style="height: 25px">
+                <td class="style1"> 任课教师：</td>
+                <td colspan="2" class="style5">
+                    <input type="text" name="Mentor" value="@Model.Mentor" />
+                </td>
+            </tr>
+            @*<tr style="height: 25px">
+                <td class="style1">
+                    课程类型：
+                </td>
+                <td colspan="2" class="style5">
+                    @Html.DropDownList("Cstyle", new SelectListItem[]
+                       {
+                           new SelectListItem() { Text="",Value=""},
+                           new SelectListItem() { Text="自学",Value="自学"},
+                           new SelectListItem() { Text="院公开课",Value="院公开课"}
+                       }, Model.Cstyle, new { Class = "form-control" })
+                </td>
+            </tr>*@
+            <tr style="height: 25px">
+                <td class="style1">
+                    教室：
+                </td>
+                <td colspan="2" class="style5">
+
+                    <input type="text" name="Room" value="@Model.Room"/>
+                </td>
+            </tr>
+            <tr style="height: 25px">
+                <td class="style1">
+                    学分：
+                </td>
+                <td colspan="2" class="style5">
+
+                    <input type="text" name="Credit" value="@Model.Credit" />
+                </td>
+            </tr>
+            <tr style="height: 25px">
+                <td class="style1">
+                    上课时间：
+                </td>
+                <td colspan="2" class="style5">
+                    @Html.DropDownList("WeekDay", new SelectListItem[]
+                       {
+                           new SelectListItem() { Text="周一",Value="周一"},
+                           new SelectListItem() { Text="周二",Value="周二"},
+                           new SelectListItem() { Text="周三",Value="周三"},
+                           new SelectListItem() { Text="周四",Value="周四"},
+                           new SelectListItem() { Text="周五",Value="周五"},
+                           new SelectListItem() { Text="周六",Value="周六"},
+                           new SelectListItem() { Text="周日",Value="周日"}
+                       }, Model.WeekDay, new { Class = "form-control" })
+                </td>
+            </tr>
+            <tr style="height: 25px">
+                <td class="style2">
+                    节次：
+                </td>
+                <td colspan="2" class="style6">
+
+                    @Html.DropDownList("StartClass", new SelectListItem[]
+                       {
+                           new SelectListItem() { Text="1",Value="1"},
+                           new SelectListItem() { Text="2",Value="2"},
+                           new SelectListItem() { Text="3",Value="3"},
+                           new SelectListItem() { Text="4",Value="4"},
+                           new SelectListItem() { Text="5",Value="5"},
+                           new SelectListItem() { Text="6",Value="6"},
+                           new SelectListItem() { Text="7",Value="7"},
+                           new SelectListItem() { Text="8",Value="8"},
+                           new SelectListItem() { Text="9",Value="9"},
+                           new SelectListItem() { Text="10",Value="10"},
+                           new SelectListItem() { Text="11",Value="11"},
+                           new SelectListItem() { Text="12",Value="12"}
+                       }, Model.StartClass.ToString(), new { Class = "form-control" })
+                    @Html.DropDownList("EndClass", new SelectListItem[]
+                       {
+                           new SelectListItem() { Text="1",Value="1"},
+                           new SelectListItem() { Text="2",Value="2"},
+                           new SelectListItem() { Text="3",Value="3"},
+                           new SelectListItem() { Text="4",Value="4"},
+                           new SelectListItem() { Text="5",Value="5"},
+                           new SelectListItem() { Text="6",Value="6"},
+                           new SelectListItem() { Text="7",Value="7"},
+                           new SelectListItem() { Text="8",Value="8"},
+                           new SelectListItem() { Text="9",Value="9"},
+                           new SelectListItem() { Text="10",Value="10"},
+                           new SelectListItem() { Text="11",Value="11"},
+                           new SelectListItem() { Text="12",Value="12"}
+                       }, Model.EndClass.ToString(), new { Class = "form-control" })
+                </td>
+            </tr>
+            <tr style="height: 25px">
+                <td class="style1">
+                    周数：
+                </td>
+                <td colspan="2" class="style5">
+
+                    @Html.DropDownList("StartWeek", new SelectListItem[]
+                       {
+                           new SelectListItem() { Text="1",Value="1"},
+                           new SelectListItem() { Text="2",Value="2"},
+                           new SelectListItem() { Text="3",Value="3"},
+                           new SelectListItem() { Text="4",Value="4"},
+                           new SelectListItem() { Text="5",Value="5"},
+                           new SelectListItem() { Text="6",Value="6"},
+                           new SelectListItem() { Text="7",Value="7"},
+                           new SelectListItem() { Text="8",Value="8"},
+                           new SelectListItem() { Text="9",Value="9"},
+                           new SelectListItem() { Text="10",Value="10"},
+                           new SelectListItem() { Text="11",Value="11"},
+                           new SelectListItem() { Text="12",Value="12"},
+                           new SelectListItem() { Text="13",Value="13"},
+                           new SelectListItem() { Text="14",Value="14"},
+                           new SelectListItem() { Text="15",Value="15"},
+                           new SelectListItem() { Text="16",Value="16"}
+                       }, Model.StartWeek.ToString(), new { Class = "form-control" })
+                    至 @Html.DropDownList("EndWeek", new SelectListItem[]
+                       {
+                           new SelectListItem() { Text="1",Value="1"},
+                           new SelectListItem() { Text="2",Value="2"},
+                           new SelectListItem() { Text="3",Value="3"},
+                           new SelectListItem() { Text="4",Value="4"},
+                           new SelectListItem() { Text="5",Value="5"},
+                           new SelectListItem() { Text="6",Value="6"},
+                           new SelectListItem() { Text="7",Value="7"},
+                           new SelectListItem() { Text="8",Value="8"},
+                           new SelectListItem() { Text="9",Value="9"},
+                           new SelectListItem() { Text="10",Value="10"},
+                           new SelectListItem() { Text="11",Value="11"},
+                           new SelectListItem() { Text="12",Value="12"},
+                           new SelectListItem() { Text="13",Value="13"},
+                           new SelectListItem() { Text="14",Value="14"},
+                           new SelectListItem() { Text="15",Value="15"},
+                           new SelectListItem() { Text="16",Value="16"}
+                       }, Model.EndWeek.ToString(), new { Class = "form-control" })
+                    周
+                </td>
+            </tr>
+            <tr style="height: 25px">
+                <td class="style1">
+                    容量：
+                </td>
+                <td colspan="2" class="style5">
+
+                    <input type="text" name="MaxNum"  value="@Model.MaxNum"/>
+                </td>
+            </tr>
+            <tr style="height: 25px">
+                <td class="style1">
+                    已选：
+                </td>
+                <td colspan="2" class="style5">
+
+                    <input type="text" name="RealNum" value="@Model.RealNum" />
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="3" style="height: 23px; text-align:center" class="style7">
+
+                    <input type="submit" value="修改" />
+                    @Html.ActionLink("返回", "ShowCourses")
+
+                </td>
+            </tr>
+        </table>
+
+    </div>
+}

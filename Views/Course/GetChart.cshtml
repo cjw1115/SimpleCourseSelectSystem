@@ -1,0 +1,255 @@
+﻿@model 选课系统.ViewModel.GetChartVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style type="text/css">
+        .style1 {
+            width: 100%;
+            border-style: solid;
+            border-width: 1px;
+        }
+
+        .style2 {
+            border-style: solid;
+            border-width: 1px;
+            padding: 1px 4px;
+        }
+
+        .style4 {
+            border-width: 1px;
+            padding: 1px 4px;
+            text-align: center;
+        }
+
+        .style5 {
+            text-align: center;
+            border-style: solid;
+            border-width: 1px;
+            padding: 1px 4px;
+        }
+
+        .style6 {
+            table-layout: fixed;
+            border-style: solid;
+            border-width: 1px;
+            padding: 1px 4px;
+        }
+
+        .style7 {
+            width: 71px;
+            border-style: solid;
+            border-width: 1px;
+            padding: 1px 4px;
+        }
+
+        .style8 {
+            width: 104px;
+            border-style: solid;
+            border-width: 1px;
+            padding: 1px 4px;
+        }
+
+        .style9 {
+            font-family: 宋体, Arial, Helvetica, sans-serif;
+        }
+
+        .style10 {
+            font-size: medium;
+        }
+
+        .style11 {
+            font-family: 宋体, Arial, Helvetica, sans-serif;
+            font-size: medium;
+        }
+
+        .style12 {
+            font-family: 宋体, Arial, Helvetica, sans-serif;
+            text-decoration: underline;
+        }
+
+        .style13 {
+            font-family: 宋体, Arial, Helvetica, sans-serif;
+            font-size: medium;
+            text-decoration: underline;
+        }
+
+        .style14 {
+            border-style: solid;
+            border-width: 1px;
+            padding: 1px 4px;
+            height: 22px;
+        }
+
+        .style15 {
+            table-layout: fixed;
+            border-style: solid;
+            border-width: 1px;
+            padding: 1px 4px;
+            height: 22px;
+        }
+
+        .style16 {
+            table-layout: fixed;
+            border-style: solid;
+            border-width: 1px;
+            padding: 1px 4px;
+            width: 116px;
+        }
+
+        .style17 {
+            font-family: 宋体, Arial, Helvetica, sans-serif;
+            font-size: large;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" >
+        <div style="text-align: center" class="style17">
+
+            <strong>学生遴选导师表格</strong>
+        </div>
+        <p>
+            表格说明：
+        </p>
+        <p>
+            <span class="style11">(1)导师签署学生的申请表意味着确定导师与学生的关系，导师将指导学生完成选课，毕业设计开题报告、毕业设计（论文），每名导师指导的学生不能超过4</span><span style="mso-spacerun:'yes'; font-family:宋体; mso-font-kerning:1.0000pt; "
+                                                                                                                                                                              class="style10"><span class="style9">人。</span></span>
+        </p>
+        <p class="style11" >
+            (2)学生选课应按导师及教学计划要求指定课程选课，否则不能毕业，结果自负。
+        </p>
+        <p>
+            <span class="style13"><strong>(3)本表在</strong></span><span style="font-family:宋体;"
+                                                                      class="style10"><span class="style12"><strong>XX月XX日前填写好全部内容，以班级为单位上交到XX楼XX学院教务科。</strong></span></span>
+        </p>
+        <table class="style1">
+            <tr>
+                <td colspan="12" class="style5">
+                    <strong style="text-align: center">学生情况表</strong>
+                </td>
+            </tr>
+            <tr>
+                <td class="style8">
+                    学号
+                </td>
+                <td colspan="2" class="style2">
+                    <label >@Model.User.Username</label>
+                </td>
+                <td colspan="2" class="style2">
+                    姓名
+                </td>
+                <td class="style2">
+                    <label>@Model.User.Name</label>
+                </td>
+                <td class="style2">
+                    性别
+                </td>
+                <td colspan="2" class="style2">
+                    <label>@Model.User.Gender
+                    </label>
+                </td>
+                <td colspan="2" class="style2">
+                    申报的专业方向
+                </td>
+                <td class="style2">
+                    <label>@Model.User.Student.Major</label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="style16">
+                    联系方式
+                </td>
+                <td colspan="2" class="style2">
+                    <label>@Model.User.Contact</label>
+                </td>
+                @*<td colspan="2" class="style2">
+                    加权成绩
+                </td>
+                <td colspan="2" class="style7">
+                    <label>@Model.User.Student.Score</label>
+                </td>*@
+                <td colspan="2" class="style6">
+                    申报导师姓名
+                </td>
+                <td colspan="2" class="style2">
+                    <label>@Model.User.Student.Mentor</label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="12" class="style2">
+                    学生情况简介：<br />
+                    <label>@Model.User.Student.PersonInfo</label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="12" class="style5">
+                    <strong>以下内容导师填写</strong>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="style16">
+                    导师姓名
+                </td>
+                <td colspan="2" class="style2">
+                    &nbsp;
+                </td>
+                <td colspan="2" class="style2">
+                    导师所在学科部
+                </td>
+                <td colspan="2" class="style7">
+                    &nbsp;
+                </td>
+                <td colspan="2" class="style6">
+                    电话
+                </td>
+                <td colspan="2" class="style2">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td colspan="12" class="style2">
+                    <strong>专业课程（192学时，12学分）</strong>
+                    <table class="style4" style="border:thick">
+                        <tr>
+                            <th>课程名称</th>
+                            <th>学分</th>
+                        </tr>
+                        @foreach (var item in Model.Courses)
+                        {
+                            <tr>
+                                <td>@item.CourseName</td>
+                                <td>@item.Credit</td>
+                            </tr>
+                        }
+                    </table>
+
+                    <p class="MsoNormal">
+                        <span class="style13">
+                            <strong>请严格按照教学计划要求，参考教务科已排好的课表，最低选够</strong>
+                        </span><span style="font-family:宋体;"
+                                     class="style10"><span class="style12"><strong>12学分课程，个别课程一周安排二次，请选课时务必注意，避免选课冲突。</strong></span></span>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" class="style14">
+                    学生签字：
+                </td>
+                <td colspan="4" class="style14">
+                    导师签字：
+                </td>
+                <td colspan="4" class="style15">
+                    日期:
+                </td>
+            </tr>
+        </table>
+        <br />
+    </form>
+</body>
+</html>

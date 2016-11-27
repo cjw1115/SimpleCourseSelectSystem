@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "课程表";
+    Layout = "~/Views/_LayoutPageMain.cshtml";
+}
+
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script type="text/javascript">
+    $.ajax({
+        url: "GetSchedule",
+        method: "Post",
+        success: loadData
+        });
+    function loadData(data) {
+        var list=data.CourseList;
+        for (var i = 0; i < list.length; i++) {
+            var week = 0;
+            var StartClass = list[i].StartClass;
+            var EndClass = list[i].EndClass;
+            switch (list[i].WeekDay) {
+                case "周一":
+                    week = 1; break;
+                case "周二":
+                    week = 2; break;
+                case "周三":
+                    week = 3; break;
+                case "周四":
+                    week = 4; break;
+                case "周五":
+                    week = 5; break;
+                case "周六":
+                    week = 6; break;
+                case "周日":
+                    week = 7; break;
+            }
+            
+            $("#schedule tr:eq(" + StartClass + ") td:eq(" + week + ")").attr("rowspan", EndClass - StartClass + 1);
+           
+            var value = list[i].CourseName + "<br/>" + list[i].StartClass + '-' + list[i].EndClass+"节" +
+                "<br/>" + list[i].StartWeek + '-' + list[i].EndWeek + "周" + "<br/>" + list[i].Room + "<br/>" + list[i].Mentor;
+            $("#schedule tr:eq(" + StartClass + ") td:eq(" + week + ")").html(value);
+            for (var index = 0, index=Number(StartClass)+1; index <= EndClass; index++) {
+                $("#schedule tr:eq(" + index + ") td:eq(" + week + ")").remove();
+            }
+        }
+    }
+</script>
+<table class="table" onload="onload" id="schedule" border="1">
+    <tr>
+        <th>课程表</th>
+        <th>星期一</th>
+        <th>星期二</th>
+        <th>星期三</th>
+        <th>星期四</th>
+        <th>星期五</th>
+        <th>星期六</th>
+        <th>星期日</th>
+    </tr>
+    @for (int i = 0; i < 12; i++)
+    {
+        <tr class="r @i.ToString()">
+            @for (int j = 0; j < 8; j++)
+            {
+                if (j == 0)
+                {
+                    <td  class="c @j.ToString()">@(i+1)</td>
+                }
+
+                else
+                {
+                    <td class="c @j.ToString()"></td>
+                }
+
+            }
+        </tr>
+    }
+</table>

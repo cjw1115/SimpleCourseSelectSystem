@@ -1,0 +1,86 @@
+﻿@model 选课系统.ViewModel.ViewModelBase 
+@{
+    ViewBag.Title = "个人信息";
+    Layout = "~/Views/_LayoutPageMain.cshtml";
+}
+
+@using (Html.BeginForm("Info","Center",FormMethod.Post))
+{
+    <div>
+        <table class="table">
+            <tr>
+                <td class="style3">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon1">学号</span>
+                        <input type="text" value="@Model.User.Username" name="Username"  class="form-control" Enabled="false" Width="150" ID="tbxuehao" />
+                    </div>
+                </td>
+                <td class="style4">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon1">姓名</span>
+                        <input type="text" value="@Model.User.Name" name="Name"  class="form-control" Width="150" ID="tbxingming" />
+                    </div>
+
+                </td>
+                <td class="style5">
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon1"> 性别</span>
+                        <input type="text" value="@Model.User.Gender" name="Gender" ID="tbxingbie" class="form-control" Width="150" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="style3">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon1">联系方式</span>
+                        <input type="text" value="@Model.User.Contact" name="Contact" class="form-control" Width="150" ID="tblianxi" />
+                    </div>
+
+                </td>
+                @*<td class="style2" colspan="2">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon1">加权成绩</span>
+                        <input type="text" value="@Model.User.Student.Score" name="Student.Score" class="form-control" Width="150" ID="tbchengji" />
+                    </div>
+                </td>*@
+            </tr>
+            <tr>
+                <td class="style3">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon1">申报的专业方向</span>
+
+                        @Html.DropDownList("Student.Major",
+                       new System.Web.Mvc.SelectList(new SelectListItem[] {
+                           new SelectListItem() { Text="机械制造方向",Value="机械制造方向"},
+                           new SelectListItem() { Text="机械设计方向",Value="机械设计方向"},
+                           new SelectListItem() { Text="焊接技术方向",Value="焊接技术方向"},
+                           new SelectListItem() { Text="测控技术方向",Value="测控技术方向"},
+                           new SelectListItem() { Text="过程装备方向",Value="过程装备方向"},
+                           new SelectListItem() { Text="安全工程方向",Value="安全工程方向"},
+                       },"Value","Text","机械制造方向"),
+                        Model.User.Student.Major, new { Class = "form-control"})
+                    </div>
+                </td>
+                <td class="style2" colspan="2">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon1">导师姓名</span>
+                        <input type="text" value="@Model.User.Student.Mentor" name="Student.Mentor" class="form-control" Width="150" ID="tbdaoshi" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="style2" colspan="3">
+                    学生情况简介:<br />
+                    <input type="text" value="@Model.User.Student.PersonInfo" name="Student.PersonInfo" TextMode="MultiLine" class="form-control" ID="tbjianjie" Height="234px" Width="500"
+                           Rows="10" />
+                </td>
+            </tr>
+        </table>
+
+    </div>
+        <br />
+        <div style="text-align:center;">
+            <input type="submit" class="btn btn-info" value="保存" Width="100" />
+        </div>
+}

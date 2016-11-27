@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+@model 选课系统.ViewModel.ViewModelBase
+<html>
+<head>
+    <title>@ViewData["Title"] - CQInfoSystem</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <link rel="stylesheet" href="~/wwwroot/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/wwwroot/css/site.css" />
+
+    
+    <script src="~/wwwroot/lib/jquery/dist/jquery.js"></script>
+    <script src="~/wwwroot/js/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/wwwroot/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/wwwroot/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a  class="navbar-brand">XX学院选课系统</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="~/center/info">个人信息</a></li>
+                    <li><a href="~/center/changepwd">修改密码</a></li>
+                    <li><a href="~/course/maincourse">本专业方向选课</a></li>
+                    <li><a href="~/course/othercourse">其他专业方向选课</a></li>
+                    <li><a href="~/course/schedule">查看课表</a></li>
+                    <li><a href="~/course/GetChart">导出学生遴选导师表格</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a>@Model.User.Username</a></li>
+                    <li><a>@Model.User.Name</a></li>
+                    <li><a href="~/center/Logout">注销</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; 2016 - XX选课系统</p>
+        </footer>
+    </div>
+</body>
+</html>

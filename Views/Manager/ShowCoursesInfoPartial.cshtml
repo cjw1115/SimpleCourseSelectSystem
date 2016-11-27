@@ -1,0 +1,20 @@
+﻿@model 选课系统.ViewModel.ShowUsersCoursesVM
+<table class="table">
+    <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>课程编号</th>
+        <th>课程名称</th>
+        <th>教师姓名</th>
+    </tr>
+    @foreach (var item in Model.SelectedCourses)
+    {
+        <tr>
+            <td>@item.Username</td>
+            <td>@item.Name</td>
+            <td>@item.CourseID</td>
+            <td>@item.CourseName</td>
+            <td>@item.Mentor</td>
+        </tr>
+    }
+</table>

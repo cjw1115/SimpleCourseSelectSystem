@@ -1,0 +1,83 @@
+﻿
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head  >
+
+    <title>机电学院本科生选课系统</title>
+
+    <link href="~/wwwroot/js/jqtransformplugin/jqtransform.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="~/wwwroot/js/jqtransformplugin/jquery.jqtransform.js"></script>
+    <script type="text/javascript" language="javascript">
+		$(function(){
+		    $('form').jqTransform({ imgPath: 'Scripts/jqtransformplugin/img/' });
+		});
+    </script>
+    <link href="~/wwwroot/css/lib.css" rel="stylesheet" media="screen" title="no title" charset="utf-8" />
+    <script src="~/wwwroot/lib/jquery/dist/jquery.js"></script>
+    <script src="~/wwwroot/js/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/wwwroot/js/jquery.ez-bg-resize.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("body").ezBgResize({
+                img: "/Content/images/bg.png", // Relative path example.  You could also use an absolute url (http://...).
+		        opacity : 1, // Opacity. 1 = 100%.  This is optional.
+		        center  : true // Boolean (true or false). This is optional. Default is true.
+	        });
+        });
+        function btnchongzhi_Click(){
+            window.location.href = "/center/regist";
+        }
+        function OnSuccess(data) {
+            alert(data.Msg);
+            if (data.Code == 1) {
+                var boolCheck = $('input:radio[class="radio1"]').is(":checked");
+                if (boolCheck) {
+                    window.location.href = "/center/info";
+                }
+                else {
+                    window.location.href = "/manager/ShowCourses";
+                }
+                
+            }
+            
+        }
+    </script>
+</head>
+<body>
+    <div id="container">
+        <div class="center_element" style="width:200px;padding:10px;font-size:xx-large">登录选课系统</div>
+        @using (Ajax.BeginForm("Login",null,new AjaxOptions { OnSuccess= "OnSuccess",HttpMethod="Post" }, new { id="form" }))
+        {
+            <div>
+            <div class="center_element" style="width:200px;">用户名</div>
+            <input type="text" name="tbUsername"   style="margin-left:auto;margin-right:auto;width:200px"
+                   data-dividertheme="login-input" class="login-input" />
+
+
+            <div class="center_element" style="width:200px;">密 码</div>
+            <div class="center_element">
+                <input  type="password" name="tbPassword"   style="margin-left:auto;margin-right:auto;width:200px"
+                       data-dividertheme="login-input" class="login-input"
+                       TextMode="Password" />
+            </div>
+            <div class="center_element">
+                <div   style="margin-left:auto;margin-right:auto;padding-bottom:4px;width:200px">
+
+                    <input type="radio" class="radio1" name="btnRadio" checked="checked" value="student" /><label>学生</label>
+                    <input type="radio" class="radio2" name="btnRadio" value="Mentor" /><label>教师</label>
+                </div>
+            </div>
+            <div class="center_element">
+                <input type="submit" value="登陆" style="margin-left:auto;margin-right:auto;width:200px" class="login-submit" data-dividertheme="login-submit" />
+                <input type="button" value="注册" id="btnchongzhi" style="width:200px;margin-left:auto;margin-right:auto"
+                       onclick="btnchongzhi_Click();"
+                       class="login-submit" />
+
+            </div>
+        </div>
+
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+﻿@model IEnumerable< 选课系统.Model.Course >
+
+@using (Ajax.BeginForm("Select", "Course", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "OnSuccess" }))
+{
+    <table class="table" border="0" cellpadding="0" cellspacing="0"
+           style="width: 1000px; height: 25px; text-align: left;">
+        <tr>
+            <th>选课</th>
+            <th>课程号</th>
+            <th>课程名称</th>
+            <th>任课教师</th>
+            <th>学分</th>
+            <th>上课时间</th>
+            <th>节次</th>
+            <th>周次</th>
+            <th>容量</th>
+            <th>已选</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.CheckBox(item.CourseID.ToString(), false)</td>
+                <td>@item.CourseID</td>
+                <td>@item.CourseName</td>
+                <td>@item.Mentor</td>
+                <td>@item.Credit</td>
+                <td>@item.WeekDay</td>
+                <td>@item.StartClass-@item.EndClass</td>
+                <td>@item.StartWeek - @item.EndWeek</td>
+                <td>@item.MaxNum</td>
+                <td>@item.RealNum</td>
+            </tr>
+        }
+    </table>
+        <div style="text-align:center">
+            <input type="submit" class="btn btn-info" ID="btnxuanke"
+                   value="选课" style="text-align: center" Width="100" />
+
+        </div>
+}
+<script type="text/javascript">
+    function OnSuccess(info) {
+        //{"AllCoursesNum":1,"SuccessedNum":0,"FailedNum":1,"FullCourses":null,"RepeatCourses":["精密仪器设计"]}
+        var all = "提交选课信息" + info.AllCoursesNum + "条";
+        var success = "成功提交" + info.SuccessedNum + "条";
+        alert(all + "\n" + success);
+        refresh();
+    }
+    function refresh() {
+        //$.ajax({
+        //    type: 'GET',
+        //    url: "maincourse?flag=" + Math.random(),
+        //    success:function success(data){
+        //        window.location.reload();
+        //    }
+        //});
+        window.location.reload();
+    }
+</script>

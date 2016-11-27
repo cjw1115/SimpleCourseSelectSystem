@@ -1,0 +1,11 @@
+﻿@model 选课系统.ViewModel.CourseListVM
+@{
+    ViewBag.Title = "本专业选课";
+    Layout = "~/Views/_LayoutPageMain.cshtml";
+}
+<div id="main">
+    <h3 style="color:red">请优先选择你的专业方向的课程！</h3>
+    @{ 
+        Html.RenderPartial("Select",Model.CourseList);
+    }
+</div>

@@ -1,0 +1,82 @@
+﻿@using 选课系统.Model
+@model List<Course>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-2.1.4.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script type="text/javascript">
+        
+        $(".select").click(function() {
+            alert("test");
+            selectItem($(this).attr("ids"), $(this));
+        });
+
+        function selectItem(id,control) {
+            $.post("/Course/Select", { "CourseID": id }, function(data) {
+                if (data.contains("成功")) {
+                    alert("成功");
+                    $(control).parent().parent().remove();
+                } else {
+                    alert("失败");
+                }
+                
+            });
+        }
+        
+    </script>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <th>加入课表</th>
+                <th>课程编号</th>
+                <th>课程名称</th>
+                <th>任课教师</th>
+                <th>课程类型</th>
+                <th>学分</th>
+                <th>上课时间</th>
+                <th>节次</th>
+                <th>周次</th>
+                <th>容量</th>
+                <th>已选</th>
+                
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    @*<td>@using (Ajax.BeginForm("Select", "Course", new AjaxOptions {HttpMethod = "post", OnSuccess = "OnSelectSuccess"}))
+                        {
+                            @Html.Hidden("CourseID", item.CourseID)
+                            ;
+                            <input type="submit" name="btn" value="添加" onclick="submit"/>
+                        }
+                    </td>*@
+                    <td><a href="javascript:void(0)" class="select" ids="@item.CourseID" >选择</a></td>
+                    
+                    <td>@item.CourseID</td>
+                    <td>@item.CourseName</td>
+                    <td>@item.Mentor</td>
+                    <td>@item.Credit</td>
+                    <td>@item.WeekDay</td>
+                    <td>@item.StartClass-@item.EndClass</td>
+                    <td>@item.StartWeek-@item.EndWeek</td>
+                    <td>@item.MaxNum</td>
+                    <td>@item.RealNum</td>
+                    
+                </tr>
+                
+            }
+        </table>
+    </div>
+</body>
+</html>

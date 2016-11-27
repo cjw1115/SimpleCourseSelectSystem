@@ -1,0 +1,42 @@
+﻿@model 选课系统.ViewModel.SelectedCoursesVM
+<div>
+    <strong>已选课程</strong>
+    <table class="table" border="0" cellpadding="0" cellspacing="0"
+           style="width: 1000px; height: 25px; text-align: left;">
+        <tr>
+            <th>课程号</th>
+            <th>课程名称</th>
+            <th>任课教师</th>
+            <th>学分</th>
+            <th>上课时间</th>
+            <th>节次</th>
+            <th>周数</th>
+
+        </tr>
+        @foreach (var item in Model.SelectedCourses)
+            {
+            <tr>
+                <td>@item.CourseID</td>
+                <td>@item.CourseName</td>
+                <td>@item.Mentor</td>
+                <td>@item.Credit</td>
+                <td>@item.WeekDay</td>
+                <td>@item.StartClass-@item.EndClass</td>
+                <td>@item.StartWeek - @item.EndWeek</td>
+                <td>@Ajax.ActionLink("退选", "StuUnSelect", "Course", new { CourseID=item.CourseID }, new AjaxOptions() { OnSuccess = "UnSelectSuccess", HttpMethod = "Post", Confirm = "确定退选吗？" }, new { CourseID = item.CourseID })</td>
+            </tr>
+        }
+    </table>
+    <label>已选学分：</label><label>@Model.Credit 学分</label>
+    @*<script src="~/Scripts/jquery-2.1.4.min.js"></script>*@
+    <script type="text/javascript">
+        function UnSelectSuccess(data) {
+            alert(data.Msg);
+            if (data.Code == 1) {
+                //删除成功
+                var tr = $("table :eq(0) *[CourseID=" + data.Param + "]").parent().parent();
+                tr.remove();
+            }
+        }
+    </script>
+</div>

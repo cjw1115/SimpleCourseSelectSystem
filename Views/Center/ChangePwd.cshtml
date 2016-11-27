@@ -1,0 +1,36 @@
+﻿@model 选课系统.ViewModel.ViewModelBase
+@{
+    ViewBag.Title = "修改密码";
+    Layout = "~/Views/_LayoutPageMain.cshtml";
+}
+
+@using (Html.BeginForm("ChangePwd", "Center", FormMethod.Post))
+{
+    <div style="margin-left:auto;margin-right:auto;width:230px;">
+
+        <div class="input-group input-group-sm" style="width:230px">
+            <span class="input-group-addon" id="sizing-addon1" style="width:80px">学号</span>
+
+            <input type="text" id="tbID" value="@User.Identity.Name" class="form-control" width="150"/>
+        </div>
+
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon" id="sizing-addon1 " style="width:80px">原密码</span>
+            <input type="password" name="oldPwd" id="oldpwd" class="form-control" width="150" />
+
+        </div>
+
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon" id="sizing-addon1" style="width:80px">新密码</span>
+
+            <input type="password" id="newpwd" name="newPwd"  class="form-control" width="150" />
+        </div>
+
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon" id="sizing-addon1" style="width:80px">重复密码</span>
+            <input type="password"  id="newpwdagain" name="rePwd"  class="form-control" width="150" />
+
+        </div>
+        <input type="submit" class="btn btn-info" ID="submit" value="保存" Width="230" />
+    </div>
+}

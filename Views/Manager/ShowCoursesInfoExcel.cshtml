@@ -1,0 +1,21 @@
+﻿@model 选课系统.ViewModel.ShowCoursesInfoVM
+<table class="table">
+        <tr>
+            <th>课程编号</th>
+            <th>课程名称</th>
+            <th>教师姓名</th>
+            <th>容量限制</th>
+            <th>已选人数</th>
+        </tr>
+        @foreach (var item in Model.Couses)
+        {
+            <tr>
+                <td>@item.CourseID</td>
+                <td>@item.CourseName</td>
+                <td>@item.Mentor</td>
+                <td>@item.MaxNum</td>
+                <td>@item.RealNum</td>
+                
+            </tr>
+        }
+    </table>
